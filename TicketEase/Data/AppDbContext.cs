@@ -11,10 +11,12 @@ namespace TicketEase.Data
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Producer> Producers { get; set; }
         public DbSet<Actor_Movie> Actors_Movies { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             
         }
+
 
         // Méthode appelée lors de la création du modèle de données
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,7 +37,5 @@ namespace TicketEase.Data
             // Appelle la méthode OnModelCreating du DbContext de base pour effectuer d'autres configurations
             base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }
