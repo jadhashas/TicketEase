@@ -19,7 +19,7 @@ namespace TicketEase.Controllers
             var data = _context.Actors.ToList();
             // Cette action retourne simplement la vue par défaut pour l'Index des acteurs
             // La vue associée à cette action sera recherchée dans le dossier Views/Actors (par convention)
-            return View();
+            return View(data);
         }
     }
 }
