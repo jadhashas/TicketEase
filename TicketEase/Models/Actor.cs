@@ -15,8 +15,11 @@ namespace TicketEase.Models
          */
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Profil Picture")]
         public string ProfilePictureURL { get; set; }
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
+        [Display(Name = "Biographie")]
         public string Biographie { get; set; }
 
 

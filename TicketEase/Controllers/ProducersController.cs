@@ -24,7 +24,7 @@ namespace TicketEase.Controllers
             // Une fois que la liste des producteurs est récupérée, elle peut être utilisée pour effectuer d'autres opérations ou être transmise à la vue
             // Retourne la vue par défaut pour l'Index des acteurs, en transmettant éventuellement la liste des producteurs à la vue
             // La vue associée à cette action sera recherchée dans le dossier Views/Actors (par convention)
-            return View();
+            return View(AllProduers);
         }
     }
 }
