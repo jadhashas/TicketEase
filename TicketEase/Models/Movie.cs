@@ -9,11 +9,17 @@ namespace TicketEase.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Name Movie")]
         public string Name { get; set; }
+        [Display(Name = "Description")]
         public string Description { get; set; }
+        [Display(Name = "Prix")]
         public double Price { get; set; }
+        [Display(Name = "Image Movie")]
         public string ImageURL { get; set; }
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
 
