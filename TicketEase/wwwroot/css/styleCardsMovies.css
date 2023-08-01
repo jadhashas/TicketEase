@@ -11,10 +11,12 @@
     gap: 24px;
     flex-wrap: wrap;
 }
-
+.p-size {
+    font-size: 0.9rem;
+}
 .card {
     position: relative;
-    width: 325px;
+    width: 350px;
     height: 450px;
     border-radius: 18px;
     overflow: hidden;
