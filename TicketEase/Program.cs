@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data;
+using TicketEase.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 // Services configuration
+builder.Services.AddScoped<IActorsService,ActorsService>();
 
 builder.Services.AddDbContext<AppDbContext>();
 
