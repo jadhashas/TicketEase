@@ -11499,7 +11499,7 @@ footer {
 }
 
 .footer-10 {
-    background: #222222;
+    background: #526b80;
     padding: 0 0 4em 0;
 }
 
@@ -11522,15 +11522,17 @@ footer {
     }
 
     .footer-10 .con.con-1 {
-        background: #1e1e1e;
+        background: #31404d;
+        border-radius: 0px 0px 0px 10px;
     }
 
     .footer-10 .con.con-2 {
-        background: #1c1c1c;
+        background: #495f73;
     }
 
     .footer-10 .con.con-3 {
-        background: #252525;
+        background: #31404d;
+        border-radius: 0px 0px 10px 0px;
     }
 
     .footer-10 .list-unstyled li a {
