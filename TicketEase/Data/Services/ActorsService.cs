@@ -10,9 +10,10 @@ namespace TicketEase.Data.Services
 		{
 			_context = context;
 		}
-		public void Add(Actor actor)
+        public async Task AddAsync(Actor actor)
 		{
-			throw new NotImplementedException();
+			await _context.AddAsync(actor);
+			await _context.SaveChangesAsync();
 		}
 
 		public void Delete(int id)
@@ -34,5 +35,5 @@ namespace TicketEase.Data.Services
 		{
 			throw new NotImplementedException();
 		}
-	}
+    }
 }
