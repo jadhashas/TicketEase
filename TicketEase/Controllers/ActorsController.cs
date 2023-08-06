@@ -22,5 +22,10 @@ namespace TicketEase.Controllers
             // La vue associée à cette action sera recherchée dans le dossier Views/Actors (par convention)
             return View(data);
         }
+        // Get : Actors/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
