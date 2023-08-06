@@ -15,15 +15,22 @@ namespace TicketEase.Models
          */
         [Key]
         public int Id { get; set; }
+
         [Display(Name = "Profil Picture")]
+        [Required(ErrorMessage = "Profil Picture est obligatoire")]
         public string ProfilePictureURL { get; set; }
+
         [Display(Name = "Full Name")]
+        [Required(ErrorMessage = "Nom Complet est obligatoire")]
+        [StringLength(50,MinimumLength = 3,ErrorMessage = "Le nom complet doit etre obligatoirement sa longeure entre 3 et 50")]
         public string FullName { get; set; }
+
         [Display(Name = "Biographie")]
+        [Required(ErrorMessage = "Biographie est obligatoire")]
         public string Biographie { get; set; }
 
 
         // Les relations
-        public List<Actor_Movie> Actors_Movies { get; set; }
+        public List<Actor_Movie>? Actors_Movies { get; set; }
     }
 }

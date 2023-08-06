@@ -6,10 +6,10 @@ namespace TicketEase.Data.Services
 	{
 		Task<IEnumerable<Actor>> GetAll();
 		Actor GetById(int id);
-		void Add(Actor actor);
+        Task AddAsync(Actor actor);
 
-		Actor Update(int id,Actor actor);
+        Actor Update(int id,Actor actor);
 
 		void Delete(int id);
-	}
+    }
 }
