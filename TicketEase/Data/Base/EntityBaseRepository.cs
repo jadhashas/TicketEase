@@ -11,13 +11,18 @@ namespace TicketEase.Data.Base
         {
             _context = context;
         }
-        public async Task AddAsync(T t) => await _context.Set<T>().AddAsync(t);
+        public async Task AddAsync(T t) 
+        { 
+           await _context.Set<T>().AddAsync(t);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task DeleteAsync(int id)
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
             EntityEntry entityEntry = _context.Entry(entity);
             entityEntry.State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
         // async
@@ -29,6 +34,7 @@ namespace TicketEase.Data.Base
         {
             EntityEntry entityEntry = _context.Entry(t);
             entityEntry.State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

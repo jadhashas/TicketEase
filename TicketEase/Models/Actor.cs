@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using TicketEase.Data.Base;
 
 namespace TicketEase.Models
 {
-    public class Actor
+    public class Actor:IEntityBase
     {
         /*
          * Les DataAnnotations :
