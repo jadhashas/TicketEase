@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data;
+using TicketEase.Data.Services;
 
 namespace TicketEase.Controllers
 {
     public class ProducersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProducersService _service;
 
-        public ProducersController(AppDbContext context)
+        public ProducersController(IProducersService service)
         {
-            _context = context;
+            _service = service;
         }
         // Action method pour l'affichage de la page Index des acteurs
         // Lorsqu'un utilisateur accède à l'URL correspondant à cette action, cette méthode est appelée
@@ -19,7 +20,7 @@ namespace TicketEase.Controllers
         {
             // Récupère tous les producteurs à partir de la base de données de manière asynchrone
             // La méthode ToListAsync() exécute la requête de manière asynchrone et retourne les résultats sous forme de liste
-            var AllProduers = await _context.Producers.ToListAsync();
+            var AllProduers = await _service.GetAllAsync();
 
             // Une fois que la liste des producteurs est récupérée, elle peut être utilisée pour effectuer d'autres opérations ou être transmise à la vue
             // Retourne la vue par défaut pour l'Index des acteurs, en transmettant éventuellement la liste des producteurs à la vue

@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builde
 
 // Services configuration
 builder.Services.AddScoped<IActorsService,ActorsService>();
+builder.Services.AddScoped<IProducersService,ProducersService>();
 
 builder.Services.AddDbContext<AppDbContext>();
 
