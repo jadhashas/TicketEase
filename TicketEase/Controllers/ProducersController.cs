@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data;
 using TicketEase.Data.Services;
+using TicketEase.Models;
 
 namespace TicketEase.Controllers
 {
@@ -26,6 +27,50 @@ namespace TicketEase.Controllers
             // Retourne la vue par défaut pour l'Index des acteurs, en transmettant éventuellement la liste des producteurs à la vue
             // La vue associée à cette action sera recherchée dans le dossier Views/Actors (par convention)
             return View(AllProduers);
+        }
+
+        // GET : producers/details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var productDetails = await _service.GetByIdAsync(id);
+            if(productDetails == null)
+            {
+                return View("NotFound");
+            }
+            return View(productDetails);
+        }
+        // GET : producers/create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Biographie")]Producer producer)
+        {
+            if(!ModelState.IsValid) return View(producer);
+            await _service.AddAsync(producer);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET : producers/edit/2
+        public async Task<IActionResult> Edit(int id)
+        {
+            var producersDetails = await _service.GetByIdAsync(id);
+            if(producersDetails == null) { return View("NotFound"); }
+            return View(producersDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureURL,Biographie")] Producer producer)
+        {
+            if (!ModelState.IsValid) return View(producer);
+            if(id == producer.Id)
+            {
+                await _service.UpdateAsync(id, producer);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(producer);
         }
     }
 }
