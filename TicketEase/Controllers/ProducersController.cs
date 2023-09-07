@@ -72,5 +72,21 @@ namespace TicketEase.Controllers
             }
             return View(producer);
         }
+        // GET : producers/delete/2
+        public async Task<IActionResult> Delete(int id)
+        {
+            var producersDetails = await _service.GetByIdAsync(id);
+            if (producersDetails == null) { return View("NotFound"); }
+            return View(producersDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var producersDetails = await _service.GetByIdAsync(id);
+            if (producersDetails == null) return View("NotFound");
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
