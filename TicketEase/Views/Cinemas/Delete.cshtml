@@ -1,34 +1,34 @@
-﻿@model Actor
+﻿@model Cinema
 
 @{
-    ViewData["Title"] = "Delete Actor";
+    ViewData["Title"] = "Delete Cinema";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Delete confirmation for @Model.FullName</h1>
+            <h1>Delete confirmation for @Model.Name</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group text-center">
-                    <img class="border-info rounded-circle" style="max-width:200px" id="ProfilePictureURLPreview" />
+                    <img class="border-info rounded-circle" style="max-width:200px" id="CinemaLogoPreview" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ProfilePictureURL" class="control-label"></label>
-                        <input asp-for="ProfilePictureURL" class="form-control" readonly />
-                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                        <label asp-for="Logo" class="control-label"></label>
+                        <input asp-for="Logo" class="form-control" readonly />
+                        <span asp-validation-for="Logo" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FullName" class="control-label"></label>
-                        <input asp-for="FullName" class="form-control" readonly />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Biographie" class="control-label"></label>
-                        <input asp-for="Biographie" class="form-control" readonly />
-                        <span asp-validation-for="Biographie" class="text-danger"></span>
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" readonly />
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
@@ -47,11 +47,11 @@
     <script>
         $(document).ready(function () {
             function updatePreview() {
-                var output = document.getElementById("ProfilePictureURLPreview");
-                output.src = $("#ProfilePictureURL").val();
+                var output = document.getElementById("CinemaLogoPreview");
+                output.src = $("#Logo").val();
             }
             updatePreview();
-            $("#ProfilePictureURL").on("change", updatePreview);
+            $("#Logo").on("change", updatePreview);
         });
     </script>
 }
