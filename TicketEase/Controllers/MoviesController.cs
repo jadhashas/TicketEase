@@ -18,5 +18,12 @@ namespace TicketEase.Controllers
             var AllMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(AllMovies);
         }
+
+        // GET : Movies/Details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var movieDetails = await _service.GetMovieNyIdAsync(id);
+            return View(movieDetails);
+        }
     }
 }
