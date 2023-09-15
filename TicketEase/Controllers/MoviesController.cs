@@ -25,5 +25,13 @@ namespace TicketEase.Controllers
             var movieDetails = await _service.GetMovieNyIdAsync(id);
             return View(movieDetails);
         }
+
+        // GET : Movies/Create
+        public IActionResult Create()
+        {
+            ViewData["welcome"] = "Welcome to our store";
+            ViewBag.Description = "Store description";
+            return View();
+        }
     }
 }
