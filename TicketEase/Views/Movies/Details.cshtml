@@ -1,4 +1,5 @@
-﻿@*Define modele*@
+
+@*Define modele*@
 @model Movie
 
 @*Define ViewData*@
@@ -25,7 +26,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
+                        <div class="row">
                         <p class="card-text">@Model.Description</p>
+                            <div class="col-md-6">
                         <p class="card-text">
                             <b>Cinema: </b>
                             <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaId">
@@ -39,6 +42,8 @@
                             </a>
                         </p>
                         <p class="card-text"><b>Category: </b>@Model.MovieCategory</p>
+                            </div>
+                            <div class="col-md-6">
                         <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
                         <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
                         <p class="card-text ">
@@ -56,10 +61,17 @@
                                 <span class="badge bg-primary text-white">UPCOMING</span>
                             }
                         </p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-md-12">
                         <p class="card-text">
                             <b>Actors: </b>
-                            <hr />
-                            <div class="row">
+                                </p>
+                                <div class="d-flex flex-row gap-3">
                                 @foreach (var actor in Model.Actors_Movies)
                                 {
                                     <div class="column text-center">
@@ -69,8 +81,9 @@
                                     </div>
                                 }
                             </div>
-                        </p>
-
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-md-12">

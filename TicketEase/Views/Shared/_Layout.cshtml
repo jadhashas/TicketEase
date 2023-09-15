@@ -6,7 +6,11 @@
     <title>@ViewData["Title"] - TicketEase</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/styleCardsMovies.css" asp-append-version="true" />
+	@if (!ViewContext.RouteData.Values["controller"].ToString().Equals("Movies", StringComparison.OrdinalIgnoreCase) ||
+			!ViewContext.RouteData.Values["action"].ToString().Equals("Details", StringComparison.OrdinalIgnoreCase))
+	{
+		<link rel="stylesheet" href="~/css/styleCardsMovies.css" asp-append-version="true" />
+	}
 	<link rel="stylesheet" href="~/css/styleFooter.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/ionicons.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TicketEase.styles.css" asp-append-version="true" />
