@@ -8,5 +8,6 @@ namespace TicketEase.Data.Services
     {
         Task<Movie> GetMovieNyIdAsync(int id);
         Task<NewMovieDropDownsVM> GetNewMovieDropDownsValues();
+        Task AddNewMovieAsync(NewMovieVM data);
     }
 }

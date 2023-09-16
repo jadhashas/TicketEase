@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data;
 using TicketEase.Data.Services;
+using TicketEase.Models;
 
 namespace TicketEase.Controllers
 {
@@ -36,6 +37,20 @@ namespace TicketEase.Controllers
             ViewBag.Actors = new SelectList(movieDropDownsData.Actors, "Id", "FullName");
             ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(NewMovieVM movie)
+        {
+            if (!ModelState.IsValid) {
+                var movieDropDownsData = await _service.GetNewMovieDropDownsValues();
+                ViewBag.Cinema = new SelectList(movieDropDownsData.Cinemas, "Id", "Name");
+                ViewBag.Actors = new SelectList(movieDropDownsData.Actors, "Id", "FullName");
+                ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
+                return View(movie);
+            }
+            await _service.AddNewMovieAsync(movie);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
