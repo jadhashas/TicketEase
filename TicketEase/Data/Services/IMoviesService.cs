@@ -1,4 +1,4 @@
-﻿using TicketEase.Data.Base;
+using TicketEase.Data.Base;
 using TicketEase.Data.ViewModels;
 using TicketEase.Models;
 
