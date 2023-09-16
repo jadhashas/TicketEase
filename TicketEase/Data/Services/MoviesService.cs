@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data.Base;
+using TicketEase.Data.Enums;
 using TicketEase.Data.ViewModels;
 using TicketEase.Models;
 
@@ -65,6 +66,42 @@ namespace TicketEase.Data.Services
                Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync(),
             };
             return response;
+        }
+
+        public async Task UpdateMovieAsync(NewMovieVM data)
+        {
+            var dbMovie = await _context.Movies.FirstOrDefaultAsync(n => n.Id == data.Id);
+            if(dbMovie != null)
+            {
+                dbMovie.Name = data.Name;
+                dbMovie.Description = data.Description;
+                dbMovie.Price = data.Price;
+                dbMovie.ImageURL = data.ImageURL;
+                dbMovie.StartDate = data.StartDate;
+                dbMovie.EndDate = data.EndDate;
+                dbMovie.CinemaId = data.CinemaId;
+                dbMovie.MovieCategory = data.MovieCategory;
+                dbMovie.ProducerId = data.ProducerId;
+                dbMovie.ImageURL = data.ImageURL;
+                await _context.SaveChangesAsync();
+            }
+            // Remove exesting actors
+            var exestingActorsDb = _context.Actors_Movies.Where(n => n.MovieId == data.Id).ToList();
+            _context.Actors_Movies.RemoveRange(exestingActorsDb);
+            await _context.SaveChangesAsync();
+
+            // Add actors Movie
+
+            foreach (var actorId in data.ActorIds)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = data.Id,
+                    ActorId = actorId,
+                };
+                await _context.Actors_Movies.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

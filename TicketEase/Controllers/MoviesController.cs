@@ -38,7 +38,7 @@ namespace TicketEase.Controllers
             ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
             return View();
         }
-
+        // GET : Movie/Create
         [HttpPost]
         public async Task<IActionResult> Create(NewMovieVM movie)
         {
@@ -50,6 +50,50 @@ namespace TicketEase.Controllers
                 return View(movie);
             }
             await _service.AddNewMovieAsync(movie);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var movieDEtails = await _service.GetMovieNyIdAsync(id);
+            if (movieDEtails == null)
+            {
+                return View("NotFound");
+            }
+            var movieEditable = new NewMovieVM()
+            {
+                Id = movieDEtails.Id,
+                Name = movieDEtails.Name,
+                Description = movieDEtails.Description,
+                Price = movieDEtails.Price,
+                ImageURL = movieDEtails.ImageURL,
+                StartDate = movieDEtails.StartDate,
+                EndDate = movieDEtails.EndDate,
+                CinemaId = movieDEtails.CinemaId,
+                MovieCategory = movieDEtails.MovieCategory,
+                ProducerId = movieDEtails.ProducerId,
+                ActorIds = movieDEtails.Actors_Movies.Select(n => n.ActorId).ToList(),
+            };
+            var movieDropDownsData = await _service.GetNewMovieDropDownsValues();
+            ViewBag.Cinema = new SelectList(movieDropDownsData.Cinemas, "Id", "Name");
+            ViewBag.Actors = new SelectList(movieDropDownsData.Actors, "Id", "FullName");
+            ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
+            return View(movieEditable);
+        }
+        // Movie/Edit/2
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,NewMovieVM movie)
+        {
+            if (id != movie.Id) return View("NotFound");
+            if (!ModelState.IsValid)
+            {
+                var movieDropDownsData = await _service.GetNewMovieDropDownsValues();
+                ViewBag.Cinema = new SelectList(movieDropDownsData.Cinemas, "Id", "Name");
+                ViewBag.Actors = new SelectList(movieDropDownsData.Actors, "Id", "FullName");
+                ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
+                return View(movie);
+            }
+            await _service.UpdateMovieAsync(movie);
             return RedirectToAction(nameof(Index));
         }
     }
