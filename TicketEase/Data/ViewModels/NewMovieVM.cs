@@ -6,6 +6,8 @@ namespace TicketEase.Models
 {
     public class NewMovieVM
     {
+        public int Id { get; set; }
+
         [Display(Description = "Movie name")]
         [Required(ErrorMessage = "Name est obligatoire")]
         public string Name { get; set; }
