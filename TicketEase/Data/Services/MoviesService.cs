@@ -13,6 +13,37 @@ namespace TicketEase.Data.Services
             _context = context;
         }
 
+        public async Task AddNewMovieAsync(NewMovieVM data)
+        {
+            var newMoivie = new Movie()
+            {
+                Name = data.Name,
+                Description = data.Description,
+                Price = data.Price,
+                ImageURL = data.ImageURL,
+                StartDate = data.StartDate,
+                EndDate = data.EndDate,
+                CinemaId = data.CinemaId,
+                MovieCategory = data.MovieCategory,
+                ProducerId = data.ProducerId,
+            };
+            _context.Movies.AddAsync(newMoivie);
+            await _context.SaveChangesAsync();
+
+            // Add actors Movie
+
+            foreach (var actorId in data.ActorIds)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = newMoivie.Id,
+                    ActorId = actorId,
+                };
+                await _context.Actors_Movies.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Movie> GetMovieNyIdAsync(int id)
         {
             var movieDetails = await _context.Movies
