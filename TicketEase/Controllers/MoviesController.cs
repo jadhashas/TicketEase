@@ -20,6 +20,17 @@ namespace TicketEase.Controllers
             var AllMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(AllMovies);
         }
+        // search for a movies
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var AllMovies = await _service.GetAllAsync(n => n.Cinema);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = AllMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                return View("Index", filteredResult);
+            }
+            return View("Index", AllMovies);
+        }
 
         // GET : Movies/Details/1
         public async Task<IActionResult> Details(int id)
