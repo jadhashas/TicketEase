@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data;
 using TicketEase.Data.Services;
@@ -27,10 +28,13 @@ namespace TicketEase.Controllers
         }
 
         // GET : Movies/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["welcome"] = "Welcome to our store";
-            ViewBag.Description = "Store description";
+            var movieDropDownsData = await _service.GetNewMovieDropDownsValues();
+
+            ViewBag.Cinema = new SelectList(movieDropDownsData.Cinemas, "Id", "Name");
+            ViewBag.Actors = new SelectList(movieDropDownsData.Actors, "Id", "FullName");
+            ViewBag.Producer = new SelectList(movieDropDownsData.Producers, "Id", "FullName");
             return View();
         }
     }

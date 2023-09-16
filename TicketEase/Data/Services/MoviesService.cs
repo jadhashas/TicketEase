@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Data.Base;
+using TicketEase.Data.ViewModels;
 using TicketEase.Models;
 
 namespace TicketEase.Data.Services
@@ -22,6 +23,17 @@ namespace TicketEase.Data.Services
 
             return movieDetails;
 
+        }
+
+        public async Task<NewMovieDropDownsVM> GetNewMovieDropDownsValues()
+        {
+            var response = new NewMovieDropDownsVM()
+            {
+               Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync(),
+               Cinemas = await _context.Cinemas.OrderBy(n => n.Name).ToListAsync(),
+               Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync(),
+            };
+            return response;
         }
     }
 }
