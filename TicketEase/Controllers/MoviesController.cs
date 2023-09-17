@@ -35,7 +35,7 @@ namespace TicketEase.Controllers
         // GET : Movies/Details/1
         public async Task<IActionResult> Details(int id)
         {
-            var movieDetails = await _service.GetMovieNyIdAsync(id);
+            var movieDetails = await _service.GetMovieByIdAsync(id);
             return View(movieDetails);
         }
 
@@ -66,7 +66,7 @@ namespace TicketEase.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var movieDEtails = await _service.GetMovieNyIdAsync(id);
+            var movieDEtails = await _service.GetMovieByIdAsync(id);
             if (movieDEtails == null)
             {
                 return View("NotFound");

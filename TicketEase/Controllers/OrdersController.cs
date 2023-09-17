@@ -25,5 +25,26 @@ namespace TicketEase.Controllers
 			};
 			return View(response);
 		}
-	}
+
+        public async Task<IActionResult> AddItemToShoppingCart(int id)
+        {
+            var item = await _moviesService.GetMovieByIdAsync(id);
+
+            if (item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+        public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
+        {
+            var item = await _moviesService.GetMovieByIdAsync(id);
+
+            if (item != null)
+            {
+                _shoppingCart.RemoveItemfromCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+    }
 }

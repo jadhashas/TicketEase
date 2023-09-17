@@ -18,11 +18,11 @@ namespace TicketEase.Data.Cart
 		{
 			ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 			var context = services.GetService<AppDbContext>();
-			string cartId = session.GetString("CArtId") ?? Guid.NewGuid().ToString();
-			session.SetString("cartId", cartId);
+			string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+			session.SetString("CartId", cartId);
 			return new ShoppingCart(context)
 			{
-				ShoppingCartId = cartId,
+				ShoppingCartId = cartId
 			};
 		}
 		public void AddItemToCart(Movie movie)
