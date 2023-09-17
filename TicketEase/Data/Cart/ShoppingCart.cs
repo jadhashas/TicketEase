@@ -33,7 +33,16 @@ namespace TicketEase.Data.Cart
 			_context.SaveChanges();
 		}
 
-
+		public void RemoveItemfromCart(Movie movie)
+		{
+			var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
+			if(shoppingCartItem != null)
+			{
+				if (shoppingCartItem.Amount > 1) shoppingCartItem.Amount--;
+				else _context.ShoppingCartItems.Remove(shoppingCartItem);
+			}
+			_context.SaveChanges();
+		}
 
 		public List<ShoppingCartItem> GetShoppingCartItems()
 		{
