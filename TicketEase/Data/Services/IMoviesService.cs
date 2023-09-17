@@ -6,7 +6,7 @@ namespace TicketEase.Data.Services
 {
     public interface IMoviesService:IEntityBaseRepository<Movie>
     {
-        Task<Movie> GetMovieNyIdAsync(int id);
+        Task<Movie> GetMovieByIdAsync(int id);
         Task<NewMovieDropDownsVM> GetNewMovieDropDownsValues();
         Task AddNewMovieAsync(NewMovieVM data);
         Task UpdateMovieAsync(NewMovieVM data);

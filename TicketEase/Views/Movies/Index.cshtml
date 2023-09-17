@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="btn-group">
                                 <a class="btn btn-outline-info h-75" asp-action="Details" asp-route-id="@item.Id"> <p class="p-size">Show<br/>Details</p></a>
-                                <a class="btn btn-info text-black h-75"> <p class="p-size"><i class="bi bi-cart-plus"></i> Add to Cart <br/> @item.Price DH</p></a>
+                                <a class="btn btn-info text-black h-75" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id"> <p class="p-size"><i class="bi bi-cart-plus"></i> Add to Cart <br /> @item.Price DH</p></a>
                             </div>
                         </div>
                     </div>

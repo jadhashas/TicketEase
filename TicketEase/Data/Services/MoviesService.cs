@@ -9,7 +9,7 @@ namespace TicketEase.Data.Services
     public class MoviesService:EntityBaseRepository<Movie>, IMoviesService
     {
         private readonly AppDbContext _context;
-        public MoviesService(AppDbContext context) : base(context) 
+        public MoviesService(AppDbContext context) : base(context)
         {
             _context = context;
         }
@@ -45,7 +45,7 @@ namespace TicketEase.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Movie> GetMovieNyIdAsync(int id)
+        public async Task<Movie> GetMovieByIdAsync(int id)
         {
             var movieDetails = await _context.Movies
                 .Include(c =>c.Cinema)
