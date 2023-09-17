@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TicketEase.Models;
 
 namespace TicketEase.Data
@@ -15,8 +15,10 @@ namespace TicketEase.Data
         // Orders related tables
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             
         }
