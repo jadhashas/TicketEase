@@ -13,6 +13,18 @@ namespace TicketEase.Data.Cart
             _context = context;
         }
 
+
+		public static ShoppingCart GetShoppingCart(IServiceProvider services)
+		{
+			ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+			var context = services.GetService<AppDbContext>();
+			string cartId = session.GetString("CArtId") ?? Guid.NewGuid().ToString();
+			session.SetString("cartId", cartId);
+			return new ShoppingCart(context)
+			{
+				ShoppingCartId = cartId,
+			};
+		}
 		public void AddItemToCart(Movie movie)
 		{
 			var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);

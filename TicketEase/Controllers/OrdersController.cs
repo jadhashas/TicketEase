@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using TicketEase.Data.Cart;
 using TicketEase.Data.Services;
 using TicketEase.Data.ViewModels;
@@ -14,7 +14,7 @@ namespace TicketEase.Controllers
             _moviesService = moviesService;
 			_shoppingCart = shoppingCart;
         }
-        public IActionResult Index()
+        public IActionResult ShoppingCart()
 		{
 			var items = _shoppingCart.GetShoppingCartItems();
 			_shoppingCart.ShoppingCartItems = items;
