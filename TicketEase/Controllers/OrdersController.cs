@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using TicketEase.Data.Cart;
 using TicketEase.Data.Services;
 using TicketEase.Data.ViewModels;
