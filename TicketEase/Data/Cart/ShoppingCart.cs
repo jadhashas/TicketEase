@@ -87,6 +87,16 @@ namespace TicketEase.Data.Cart
 			WHERE ShoppingCartItems.ShoppingCartId = [votre valeur ShoppingCartId]
 			*/
 		}
+		public async Task ClearShoppingCartAsync()
+		{
+			var items = await _context.ShoppingCartItems
+                .Where(n => n.ShoppingCartId == ShoppingCartId) // Sélectionne les éléments du panier pour l'utilisateur actuel
+                .Include(n => n.Movie) // Inclut également les données des films associés
+                .ToListAsync();
+			_context.ShoppingCartItems.RemoveRange(items);
+			await _context.SaveChangesAsync();
+        }
 
-	}
+
+    }
 }
