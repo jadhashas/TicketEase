@@ -70,6 +70,7 @@
 @section Scripts{
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
+        let _total = @Html.Raw(Model.ShoppingCartTotal);
         paypal.Button.render({
             // configure environment
             env: 'sandbox',
@@ -87,7 +88,14 @@
             commit: true,
             //Set up a payment
             payment: function(data,actions){
-                console.log("payment set up");
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD'
+                        }
+                    }]
+                });
             },
             //Execute the payment
             onAuthorize: function (data, actions) {
