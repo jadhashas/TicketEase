@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TicketEase.Models;
 
 namespace TicketEase.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
         // DbSet pour les entités (tables) de la base de données
         public DbSet<Actor> Actors { get; set; }
